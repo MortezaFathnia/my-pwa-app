@@ -1,0 +1,72 @@
+@import "variables";
+
+
+.btn {
+    color: white;
+    display: flex;
+    cursor: pointer;
+    font-size: em(18);
+    font-weight: bold;
+    background: $orange;
+    align-items: center;
+    transition: all 0.3s;
+    border-radius: rem(16);
+    justify-content: center;
+    padding: .8rem 1rem;
+    box-shadow: 0px 8px 8px 0px rgba(92, 89, 87, 0.28);
+    -moz-box-shadow: 0px 8px 8px 0px rgba(92, 89, 87, 0.28);
+    -webkit-box-shadow: 0px 8px 8px 0px rgba(92, 89, 87, 0.28);
+  
+    &:hover {
+      color: $orange;
+      background: $gray;
+      box-shadow: 0px 8px 8px 0px #8b8a89;
+      -moz-box-shadow: 0px 8px 8px 0px rgba(51, 51, 51, 0.28);
+      -webkit-box-shadow: 0px 8px 8px 0px rgba(51, 51, 51, 0.28);
+    }
+  
+    &--nohover:hover {
+      background: $orange !important;
+      box-shadow: 0px 8px 8px 0px rgba(92, 89, 87, 0.28);
+      -moz-box-shadow: 0px 8px 8px 0px rgba(92, 89, 87, 0.28);
+      -webkit-box-shadow: 0px 8px 8px 0px rgba(92, 89, 87, 0.28);
+    }
+  
+    &--cta {
+      font-size: em(20);
+      padding: rem(7) rem(18);
+      background-color: black !important;
+    }
+  
+    &--gray {
+      border: 0;
+      color: white;
+      // background: $navGray;
+      padding: rem(22) rem(7);
+    }
+
+    &--cyan{
+      background: $cyan;
+      color: $black;
+      &:hover {
+        background:  $cyan;
+        color: $black;
+        box-shadow: 0px 8px 8px 0px #8b8a89;
+        -moz-box-shadow: 0px 8px 8px 0px rgba(51, 51, 51, 0.28);
+        -webkit-box-shadow: 0px 8px 8px 0px rgba(51, 51, 51, 0.28);
+      }
+    }
+  
+    &--white {
+      color: white;
+      border: white 1px solid;
+    }
+  
+    &--small {
+      min-width: rem(200);
+  
+      @include respond-to('mediumdesktop') {
+        min-width: rem(100);
+      }
+    }
+  }

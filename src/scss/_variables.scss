@@ -1,0 +1,125 @@
+@import 'mixin';
+$black:#262626;
+$orange:#ffb21a;
+$cyan:#80e8d0;
+$gray:#c4c4c4;
+$white:#f4f4f4;
+
+$breakpoints: (
+  'verysmall': (
+    max-width: 340px,
+  ),
+  'small': (
+    max-width: 380px,
+  ),
+  'medium': (
+    max-width: 420px,
+  ),
+  'large': (
+    max-width: 992px,
+  ),
+  'smalldesktop': (
+    max-width: 1050px,
+  ),
+  'mediumdesktop': (
+    max-width: 1200px,
+  ),
+  'hddesktop': (
+    max-width: 1300px,
+  ),
+  'largedesktop': (
+    max-width: 1400px,
+  ),
+  'largedesktop2': (
+    max-width: 1450px,
+  ),
+  'hugedesktop': (
+    max-width: 1600px,
+  ),
+  'hugedesktop2': (
+    max-width: 1650px,
+  ),
+  'fullhddesktop': (
+    max-width: 1800px,
+  ),
+  'fullhdonly': (
+    min-width: 1800px,
+  ),
+  'hdonly': (
+    min-width: 1600px,
+  ),
+  'xlPhone': (
+    min-height: 810px,
+  ),
+  '1600': '(min-width: 1550px) and (max-width: 1600px)',
+  '1650': '(min-width: 1600px) and (max-width: 1680px)',
+  '1024': '(min-width: 980px) and (max-width: 1034px)',
+  '1280': '(min-width: 1190px) and (max-width: 1280px)',
+  '1366': '(min-width: 1290px) and (max-width: 1386px)',
+  '1440': '(min-width: 1400px) and (max-width: 1450px)',
+  '414': '(min-width:385px) and (max-width:420px)',
+  '320': '(min-width:300px) and (max-width:320px)',
+  '1920': '(min-width:1850px) and (max-width:1920px)',
+  '768': '(min-width:700px) and (max-width:768px)',
+  '800': '(min-width:800px) and (max-width:850px)',
+  '360': '(min-width:300px) and (max-width:360px)',
+  '271': '(min-width:250px) and (max-width:275px)',
+  'ipadProPwidth': (
+    width: 1024px,
+  ),
+  //ipad Pro portrait
+  'ipadProPheight':
+    (
+      height: 1366px,
+    ),
+  //ipad Pro portrait
+  'ipadProLwidth':
+    (
+      width: 1366px,
+    ),
+  //ipad Pro landscape
+  'ipadProLheight':
+    (
+      height: 1024px,
+    ),
+  //ipad Pro landscape
+  'ipadPwidth':
+    (
+      width: 768px,
+    ),
+  //ipad portrait
+  'ipadPheight':
+    (
+      height: 1024px,
+    ),
+  //ipad portrait
+  'ipadLwidth':
+    (
+      width: 1024px,
+    ),
+  //ipad landscape
+  'ipadLheight':
+    (
+      height: 768px,
+    ),
+  //ipad landscape
+  'tabletPminwidth':
+    (
+      min-width: 695px,
+    ),
+  'tabletPmaxwidth': (
+    max-width: 801px,
+  ),
+  'tabletPheight': (
+    height: 1159px,
+  ),
+  'iphoneXheight': (
+    min-height: 780px,
+  ),
+  'portrait': (
+    orientation: portrait,
+  ),
+  'landscape': (
+    orientation: landscape,
+  ),
+);

@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import MessageList from './components/MessageList';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route
+} from "react-router-dom"; 
+import './scss/style.scss';
+import LoginPage from './components/login';
+import UserContext from './contexts/AuthContext';
+import { RequireAuth } from './hooks/RequireAuth';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+    const [user, setUser] = useState({});
+    useEffect(() => {
+        setUser({ name: 'test' })
+    }, [])
+    return (
+        <UserContext.Provider value={{user:Object}}>
+            <div className="ui container">
+                <Router>
+                    <Routes>
+                        //exact
+                        <Route path="/" element={<LoginPage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/messages" element={
+                            <RequireAuth>
+                                <MessageList />
+                            </RequireAuth>} />
+                    </Routes>
+                </Router>
+            </div>
+        </UserContext.Provider >
+    );
 }
 
 export default App;

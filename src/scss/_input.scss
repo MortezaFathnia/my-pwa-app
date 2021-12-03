@@ -1,0 +1,14 @@
+@import 'variables';
+input{
+    border:1px solid $gray;
+    padding: .6rem .8rem;
+    box-shadow: 0px 3px 3px 0px rgba(92, 89, 87, 0.18);
+    -moz-box-shadow: 0px 3px 3px 0px rgba(92, 89, 87, 0.18);
+    -webkit-box-shadow: 0px 3px 3px 0px rgba(92, 89, 87, 0.18);
+    &:focus{
+        border:1px solid $gray;
+    }
+    &:active{
+        border:1px solid $gray;
+    }
+}

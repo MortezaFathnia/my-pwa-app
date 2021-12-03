@@ -1,0 +1,14 @@
+@import 'variables';
+
+.form-control {
+  display: block;
+  margin-bottom: 0.5rem;
+  input {
+    width: 100%;
+    border-radius: 15px;
+  }
+  button{
+    width: 100%;
+    border-radius: 12px;
+  }
+}
