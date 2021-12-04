@@ -1,0 +1,74 @@
+@import '../../scss/variables';
+.message-list {
+  height: 100vh;
+  li {
+    overflow: hidden;
+  }
+  .message-item {
+    display: flex;
+    padding: .3rem 0.2rem;
+    border-bottom: 1px solid $gray;
+    align-items: center;
+    position: relative;
+    &.is-open {
+      margin-right: -23%;
+    }
+    .message-body {
+      display: flex;
+      width: 100%;
+      &.is-open {
+        width: 80%;
+      }
+    }
+    .image-wrapper {
+      width: 25%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .user-image {
+        border-radius: 50%;
+        width: 90%;
+        margin-left: auto;
+        display: block;
+      }
+    }
+    .content {
+      width: 70%;
+      margin-top: 0.5rem;
+      .title {
+        margin-bottom: 0.4rem;
+        p {
+          font-size: 1rem;
+        }
+      }
+      .description {
+        p {
+          font-size: 0.8rem;
+        }
+      }
+      .btn-delete-wrapper {
+        width: 30%;
+      }
+    }
+    .btn-delete-wrapper {
+      position: absolute;
+      display: block;
+      width: 20%;
+      height: 100%;
+      left: 0;
+      background: $black;
+      button {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: $black;
+        .img-btn-wrapper {
+          border-radius: 50%;
+          background: rgb(50,50,50);
+          padding: 15px;
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
