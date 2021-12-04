@@ -13,6 +13,7 @@ import trash from '../../statics/trash-alt.png';
 import FiltersMessage from './FiltersMessage';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import api from '../../apis/jsonplaceholder';
 
 type Props = {
   fetchPosts: Function;
@@ -26,15 +27,19 @@ type Post = {
   id: number;
 };
 const MessageList = (props: Props) => {
+  const [APIData, setAPIData] = useState([]);
+  const [filteredResults, setFilteredResults] = useState(APIData);
+  const [filters, setFilters] = useState(0);
   useEffect(() => {
-    props.fetchPosts();
+    api.get('/posts').then((response) => {
+      setAPIData(response.data);
+    });
   }, []);
   const [open, setOpen] = useState(false);
   let targetMessage: any = useRef({});
   const onCloseModal = () => setOpen(false);
   const onOpenModal = () => setOpen(true);
-  const [allData, setAllData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
+
   const x = useMotionValue(0);
 
   const Item = ({ post }: any) => {
@@ -98,9 +103,15 @@ const MessageList = (props: Props) => {
   };
 
   const filterMessages = (id: number) => {
-    let result = [];
-    result = allData.filter((item: any) => item.userId === id);
-    setFilteredData(result);
+    setFilters(id);
+
+    if (id) {
+      let filteredData = [];
+      filteredData = APIData.filter((item: any) => item.userId === id);
+      setFilteredResults(filteredData);
+    } else {
+      setFilteredResults(APIData);
+    }
   };
   const removeItem = () => {
     onCloseModal();
@@ -130,16 +141,29 @@ const MessageList = (props: Props) => {
   return (
     <div>
       {renderModal()}
-      <AnimateSharedLayout>
-        <FiltersMessage onSelected={filterMessages} />
-        <motion.ul layout initial={{ borderRadius: 25 }}>
-          <div className="message-list">
-            {Object.keys(props.posts).map((keyName: any) => (
-              <Item post={props.posts[keyName]} key={keyName} />
-            ))}
-          </div>
-        </motion.ul>
-      </AnimateSharedLayout>
+      {filters !== 0 ? (
+        <AnimateSharedLayout>
+          <FiltersMessage onSelected={filterMessages} />
+          <motion.ul layout initial={{ borderRadius: 25 }}>
+            <div className="message-list">
+              {Object.keys(filteredResults).map((keyName: any) => (
+                <Item post={filteredResults[keyName]} key={keyName} />
+              ))}
+            </div>
+          </motion.ul>
+        </AnimateSharedLayout>
+      ) : (
+        <AnimateSharedLayout>
+          <FiltersMessage onSelected={filterMessages} />
+          <motion.ul layout initial={{ borderRadius: 25 }}>
+            <div className="message-list">
+              {Object.keys(APIData).map((keyName: any) => (
+                <Item post={APIData[keyName]} key={keyName} />
+              ))}
+            </div>
+          </motion.ul>
+        </AnimateSharedLayout>
+      )}
     </div>
   );
 };

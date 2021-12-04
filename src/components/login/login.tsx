@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import ErrorMessages from '../../hooks/Forms';
@@ -10,30 +10,33 @@ import './login.scss';
 import { toast } from "react-toastify";
 import { Link } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import history from "../../hooks/history"
+import {useNavigate} from 'react-router-dom';
 import api from '../../apis/reqres'
-const cookies = new Cookies()
-type Form = {
+import Loading from '../../containers/Loading';
+const cookies = new Cookies();
+
+type FormValues = {
   email: string;
   password: string;
 };
+
 const LoginPage = (props: any) => {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+  let navigate = useNavigate();
   const formValidation = Yup.object().shape({
     email: Yup.string()
       .email(ErrorMessages('email'))
       .required(ErrorMessages('required')),
     password: Yup.string().required(ErrorMessages('required')),
   });
-  const onSubmit = (formValues:Form) => {
+  const onSubmit = (formValues:FormValues) => {
     if (loading) return
     setLoading(true)
     api
       .post("/login", formValues)
       .then((response:any) => {
-        // props.login(response);
-        console.log(response)
-        history.push("/");
+        setLoading(false);
+        navigate('/')
         cookies.set('token', response.token, { path: '/', maxAge: 24 * 60 * 60 });
         delete response.token;
         props.fetchUserStores();
@@ -50,6 +53,7 @@ const LoginPage = (props: any) => {
       })
   }
   return (
+    <>
     <div className="login-wrapper">
       <div className="bg-header-wrapper">
         <div className="bg-header"></div>
@@ -123,6 +127,7 @@ const LoginPage = (props: any) => {
         </Formik>
       </div>
     </div>
+    </>
   );
 };
 

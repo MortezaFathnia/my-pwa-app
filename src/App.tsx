@@ -13,11 +13,17 @@ import UserContext from './contexts/AuthContext';
 import { RequireAuth } from './hooks/RequireAuth';
 import TheLayout from './containers/TheLayout';
 import routes from './routes';
+import { useSelector } from 'react-redux';
+
+type Istate={
+  login:Object;
+  posts:Object;
+}
 
 const App = () => {
   const [user, setUser] = useState({});
-  // const { isLoggedIn } = useSelector((state) => state.auth);
-
+  const { isLoggedIn }:any = useSelector((state:Istate) => state.login);
+  console.log(isLoggedIn);
   useEffect(() => {
     setUser({ name: 'test' });
   }, []);
