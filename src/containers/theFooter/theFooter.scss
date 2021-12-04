@@ -1,0 +1,35 @@
+@import '../../scss/variables';
+
+.footer-wrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $gray;
+  padding: 0.5rem 0;
+  border-radius: 10px;
+  .footer {
+    display: flex;
+    .footer-btn {
+      padding: 10px;
+      display: flex;
+      border-radius: 50%;
+      border: 1px solid #fff;
+      background: #bbb;
+      justify-content: center;
+      align-items: center;
+      width: 3rem;
+    }
+    .footer-home-btn {
+        padding: 10px;
+        display: flex;
+        border-radius: 50%;
+        border: 1px solid #fff;
+        background: #bbb;
+        justify-content: center;
+        align-items: center;
+        width: 4rem;
+        margin-top: -2.2rem;
+    }
+  }
+}

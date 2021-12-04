@@ -5,7 +5,7 @@ import ErrorMessages from '../../hooks/Forms';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { login } from '../../actions';
-import logo from '../../statics/04 (2).png'; 
+import logo from '../../statics/04 (2).png';
 import './login.scss';
 import { Link } from 'react-router-dom';
 
@@ -21,14 +21,18 @@ const LoginPage = (props: any) => {
   };
   return (
     <div className="login-wrapper">
-      <div className="login-container">
-        <div className="bg-header-wrapper">
-          <div className="bg-header"></div>
-          <img src={logo} alt="logo" />
-        </div>
+      <div className="bg-header-wrapper">
+        <div className="bg-header"></div>
+        <img src={logo} alt="logo" />
+      </div>
+      <div className="login-container container">
         <div className="login-content">
-          <p className="login-title mb-1 bold">با این شماره قبلا ثبت نام کردی!</p>
-          <p className="login-title-sm mb-3 gray">برای وارد شدن نام کاربری و رمز عبورت رو بنویس.</p>
+          <p className="login-title mb-1 bold">
+            با این شماره قبلا ثبت نام کردی!
+          </p>
+          <p className="login-title-sm mb-3 gray">
+            برای وارد شدن نام کاربری و رمز عبورت رو بنویس.
+          </p>
         </div>
         <Formik
           initialValues={{ email: '', password: '' }}
@@ -63,8 +67,18 @@ const LoginPage = (props: any) => {
               </div>
               <div className="form-control">
                 <div className="mb-3">
-                <p className="link-elem mb-1">رمز عبورت را فراموش کردی؟<Link className="mr-1 text--cyan" to="">بازیابی رمز عبور</Link></p>
-                <p className="link-elem mb-1">قبلا ثبت نام نکردی؟<Link className="mr-1 text--cyan" to="">ثبت نام در هوپا</Link></p>
+                  <p className="link-elem mb-1">
+                    رمز عبورت را فراموش کردی؟
+                    <Link className="mr-1 text--cyan" to="">
+                      بازیابی رمز عبور
+                    </Link>
+                  </p>
+                  <p className="link-elem mb-1">
+                    قبلا ثبت نام نکردی؟
+                    <Link className="mr-1 text--cyan" to="">
+                      ثبت نام در هوپا
+                    </Link>
+                  </p>
                 </div>
                 <button
                   disabled={!isValid || !dirty}

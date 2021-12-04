@@ -1,0 +1,23 @@
+.header-wrapper{
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    background: #fff;
+    .header-container{
+        display: flex;
+        justify-content: center;
+    }
+    .user-img{
+         padding: .3rem .5rem;
+         background: #999;
+         border-radius: 50%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+    }
+}
