@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import TheFooter from './theFooter/TheFooter';
 import TheHeader from './theHeader/TheHeader';
 

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { connect } from 'react-redux';
-import { fetchPosts } from '../../actions';
+import { fetchPosts, deletePost } from '../../actions';
 import {
   motion,
   useMotionValue,
@@ -9,16 +9,32 @@ import {
 } from 'framer-motion';
 import classNames from 'classnames';
 import './messageList.scss';
-import trash from '../../statics/trash-alt.png'; 
+import trash from '../../statics/trash-alt.png';
+import FiltersMessage from './FiltersMessage';
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+
 type Props = {
   fetchPosts: Function;
+  deletePost: Function;
   posts: any;
+};
+type Post = {
+  userId: number;
+  title: string;
+  body: string;
+  id: number;
 };
 const MessageList = (props: Props) => {
   useEffect(() => {
     props.fetchPosts();
   }, []);
-
+  const [open, setOpen] = useState(false);
+  let targetMessage: any = useRef({});
+  const onCloseModal = () => setOpen(false);
+  const onOpenModal = () => setOpen(true);
+  const [allData, setAllData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const x = useMotionValue(0);
 
   const Item = ({ post }: any) => {
@@ -53,12 +69,12 @@ const MessageList = (props: Props) => {
               </div>
             </div>
           </div>
-          <AnimatePresence>{isOpen && <Content />}</AnimatePresence>
+          <AnimatePresence>{isOpen && <Content post={post} />}</AnimatePresence>
         </div>
       </motion.li>
     );
   };
-  const Content = () => {
+  const Content = ({ post }: { post: Post }) => {
     return (
       <motion.div
         layout
@@ -67,21 +83,64 @@ const MessageList = (props: Props) => {
         exit={{ opacity: 0 }}
         className="btn-delete-wrapper"
       >
-        <button><div className="img-btn-wrapper"><img src={trash} alt="delete"/></div></button>
+        <button
+          onClick={() => {
+            onOpenModal();
+            targetMessage.current = { ...post };
+          }}
+        >
+          <div className="img-btn-wrapper">
+            <img src={trash} alt="delete" />
+          </div>
+        </button>
       </motion.div>
     );
   };
 
-  return (
-    <AnimateSharedLayout>
-      <motion.ul layout initial={{ borderRadius: 25 }}>
-        <div className="message-list">
-          {props.posts.map((post: any) => (
-            <Item post={post} key={post.id} />
-          ))}
+  const filterMessages = (id: number) => {
+    let result = [];
+    result = allData.filter((item: any) => item.userId === id);
+    setFilteredData(result);
+  };
+  const removeItem = () => {
+    onCloseModal();
+    props.deletePost(targetMessage.current.id);
+    //props.fetchPosts();
+  };
+  const renderModal = () => {
+    return (
+      <Modal open={open} onClose={onCloseModal} center>
+        <div className="modal-wrapper">
+          <div>
+            <h2 className="modal-title">Confirm Delete</h2>
+            <p className="modal-content">?Are you sure to delete</p>
+          </div>
+          <div className="btn-modal-wrapper">
+            <button className="btn btn--gray" onClick={onCloseModal}>
+              Cancel
+            </button>
+            <button className="btn btn--danger" onClick={removeItem}>
+              Confirm
+            </button>
+          </div>
         </div>
-      </motion.ul>
-    </AnimateSharedLayout>
+      </Modal>
+    );
+  };
+  return (
+    <div>
+      {renderModal()}
+      <AnimateSharedLayout>
+        <FiltersMessage onSelected={filterMessages} />
+        <motion.ul layout initial={{ borderRadius: 25 }}>
+          <div className="message-list">
+            {Object.keys(props.posts).map((keyName: any) => (
+              <Item post={props.posts[keyName]} key={keyName} />
+            ))}
+          </div>
+        </motion.ul>
+      </AnimateSharedLayout>
+    </div>
   );
 };
 
@@ -89,4 +148,6 @@ const mapStateToProps = (state: any) => {
   return { posts: state.posts };
 };
 
-export default connect(mapStateToProps, { fetchPosts })(MessageList);
+export default connect(mapStateToProps, { fetchPosts, deletePost })(
+  MessageList
+);

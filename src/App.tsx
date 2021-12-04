@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import MessageList from './components/messages/MessageList';
 import './App.scss';
-import { BrowserRouter as Router, Routes, Route,Navigate } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 
 import LoginPage from './components/login/login';
 import UserContext from './contexts/AuthContext';
@@ -29,25 +34,19 @@ const App = () => {
               <Route path="/login" element={<LoginPage />} />
 
               {routes.map((route: any) => {
-                <Route
-                  path={route.path}
-                  element={
-                    <RequireAuth>
-                      <TheLayout>
-                        <route.element />
-                      </TheLayout>
-                    </RequireAuth>
-                  }
-                />;
+                return (
+                  <Route
+                    path={route.path}
+                    element={
+                      <RequireAuth>
+                        <TheLayout>
+                          <route.element />
+                        </TheLayout>
+                      </RequireAuth>
+                    }
+                  />
+                );
               })}
-              <Route
-                path="/messages"
-                element={
-                  <TheLayout>
-                    <MessageList />
-                  </TheLayout>
-                }
-              />
             </Routes>
           </Router>
         </div>

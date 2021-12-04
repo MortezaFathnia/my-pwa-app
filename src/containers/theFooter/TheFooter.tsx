@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import './theFooter.scss';
 import { Link } from 'react-router-dom';
 import edit from '../../statics/edit.png';

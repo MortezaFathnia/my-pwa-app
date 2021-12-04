@@ -1,0 +1,21 @@
+@import '../../scss/variables';
+
+.filters-wrapper {
+  display: flex;
+  margin-top: 4rem;
+  overflow-x: auto;
+  align-items: center;
+  .filter-item {
+    border: 1px solid $black;
+    padding: 6px 13px;
+    border-radius: 15px;
+    margin-right: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    &.selected {
+      background: $gray;
+    }
+  }
+}

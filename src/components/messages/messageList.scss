@@ -1,6 +1,6 @@
 @import '../../scss/variables';
 .message-list {
-  margin: 4rem 0 5rem;
+  margin: 1rem 0 5rem;
   li {
     overflow: hidden;
   }
@@ -70,5 +70,22 @@
         }
       }
     }
+  }
+}
+.btn-modal-wrapper{
+  display: flex;
+  justify-content: flex-start;
+  button{
+    margin-left: .5rem;
+    padding: .6rem .5rem;
+  }
+}
+.modal-wrapper{
+  width: 300px;
+  .modal-title{
+    font-size: 1rem;
+  }
+  .modal-content{
+    font-size: .8rem;
   }
 }

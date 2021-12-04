@@ -41,7 +41,14 @@
     &--gray {
       border: 0;
       color: white;
-      // background: $navGray;
+      background: $gray;
+      padding: rem(22) rem(7);
+    }
+
+    &--danger {
+      border: 0;
+      color: white;
+      background: red;
       padding: rem(22) rem(7);
     }
 

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import './theHeader.scss';
 import logo from '../../statics/image 2.png';
 import user from '../../statics/avatar.png';

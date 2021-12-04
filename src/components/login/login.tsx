@@ -7,18 +7,48 @@ import { connect } from 'react-redux';
 import { login } from '../../actions';
 import logo from '../../statics/04 (2).png';
 import './login.scss';
+import { toast } from "react-toastify";
 import { Link } from 'react-router-dom';
-
+import Cookies from 'universal-cookie';
+import history from "../../hooks/history"
+import api from '../../apis/reqres'
+const cookies = new Cookies()
+type Form = {
+  email: string;
+  password: string;
+};
 const LoginPage = (props: any) => {
+  const [loading, setLoading] = useState(false)
   const formValidation = Yup.object().shape({
     email: Yup.string()
       .email(ErrorMessages('email'))
       .required(ErrorMessages('required')),
     password: Yup.string().required(ErrorMessages('required')),
   });
-  const onSubmit = (formValues: any) => {
-    props.login(formValues);
-  };
+  const onSubmit = (formValues:Form) => {
+    if (loading) return
+    setLoading(true)
+    api
+      .post("/login", formValues)
+      .then((response:any) => {
+        // props.login(response);
+        console.log(response)
+        history.push("/");
+        cookies.set('token', response.token, { path: '/', maxAge: 24 * 60 * 60 });
+        delete response.token;
+        props.fetchUserStores();
+        Object.entries(response).forEach(([key, value]) => localStorage.setItem(key, JSON.stringify(value)));
+        return response.user.FirstName;
+      })
+      .catch(err => {
+        setLoading(false)
+        if (err && err.code === "InvalidUserInfo") {
+          toast.error('نام کاربری یا رمز عبور اشتباه است')
+        } else {
+          toast.error('مشکلی پیش آمده مجددا تلاش ک')
+        }
+      })
+  }
   return (
     <div className="login-wrapper">
       <div className="bg-header-wrapper">
