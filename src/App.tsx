@@ -14,6 +14,7 @@ import { RequireAuth } from './hooks/RequireAuth';
 import TheLayout from './containers/TheLayout';
 import routes from './routes';
 import { useSelector } from 'react-redux';
+import NotFound from './pages/NotFound';
 
 type Istate={
   login:Object;
@@ -53,6 +54,7 @@ const App = () => {
                   />
                 );
               })}
+               <Route path="*" element={<NotFound />} />
             </Routes>
           </Router>
         </div>

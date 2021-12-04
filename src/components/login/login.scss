@@ -7,6 +7,18 @@
 // }
 .login-container {
   width: 376px;
+  @include respond-to('768') {
+    width: 768px;
+  }
+  @include respond-to('414') {
+    width: 414px;
+  }
+  @include respond-to('320') {
+    width: 320px;
+  }
+  @include respond-to('271') {
+    width: 270px;
+  }
 }
 
 .login-title-sm {
@@ -33,6 +45,9 @@
     width: 100%;
     height: 100%;
     margin-top: -30%;
+    @include respond-to('768') {
+      margin-top: -10%;
+    }
   }
   img{
       position: relative;
